@@ -4,6 +4,9 @@
 
 #include "CaesarCipher.h"
 
+#include <iostream>
+#include <string>
+
 using namespace std;
 
 CaesarCipher::CaesarCipher(int key) {
@@ -29,24 +32,28 @@ char CaesarCipher::characterShift(char character, int shift) {
 }
 
 string CaesarCipher::encrypt(string plainText) {
+    int shift;
     char currentCharacter;
     char encryptedCharacter;
     string cipherText(plainText.size(),' ');
     for(int i = 0; i < plainText.size(); i = i + 1) {
+        shift = this->key % 26;
         currentCharacter = plainText[i];
-        encryptedCharacter = characterShift(currentCharacter, this->key);
+        encryptedCharacter = characterShift(currentCharacter, shift);
         cipherText[i] = encryptedCharacter;
     }
     return cipherText;
 }
 
 string CaesarCipher::decrypt(string cipherText) {
+    int shift;
     char currentCharacter;
     char decryptedCharacter;
     string plainText(cipherText.size(),' ');
     for(int i = 0; i < cipherText.size(); i = i + 1) {
+        shift = this->key % 26;
         currentCharacter = cipherText[i];
-        decryptedCharacter = characterShift(currentCharacter, -this->key);
+        decryptedCharacter = characterShift(currentCharacter, -shift);
         plainText[i] = decryptedCharacter;
     }
     return plainText;
