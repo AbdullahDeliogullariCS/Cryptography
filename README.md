@@ -10,3 +10,8 @@ Caesar cipher is a type of substitution cipher in which each letter of the alpha
 Monoalphabetic cipher is a type of substitution cipher in which each letter of the plaintext is replaced with another letter. This technique uses a random key for every single letter
 
 ./Cryptography cipher seed process pathFrom pathTo
+
+## Polyalphabetic Cipher
+Polyalphabetic substitution cipher is a series of simple substitution ciphers. It is used to change each character of the plaintext with a variable length.
+
+./Cryptography cipher key  process pathFrom pathTo
