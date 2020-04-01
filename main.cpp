@@ -1,13 +1,15 @@
+#include "CaesarCipher/CaesarCipher.h"
+#include "MonoalphabeticCipher/MonoalphabeticCipher.h"
+#include "FileOperations/FileOperations.h"
+#include "PolyalphabeticCipher/PolyalphabeticCipher.h"
+
 #include <iostream>
 #include <fstream>
 #include <string>
 
-#include "CaesarCipher/CaesarCipher.h"
-#include "MonoalphabeticCipher/MonoalphabeticCipher.h"
-#include "FileOperations/FileOperations.h"
-
 // Caesar         ==> ./Cryptography cipher key  process pathFrom pathTo
 // Monoalphabetic ==> ./Cryptography cipher seed process pathFrom pathTo
+// PolyalphabeticCipher ==> ./Cryptography cipher key  process pathFrom pathTo
 
 using namespace std;
 
@@ -66,6 +68,33 @@ int main(int argc, char* argv[]) {
 
         else {
             cout << "Process has mm been failed";
+        }
+    }
+
+    else if(cipher == "polyalphabetic") {
+        string process = argv[3];
+        if(process == "-e") {
+            string key = argv[2];
+            string filenameIn = argv[4];
+            string filenameOut = argv[5];
+            PolyalphabeticCipher polyalphabeticCipher = PolyalphabeticCipher(key);
+            FileOperations fileOperations = FileOperations(filenameIn, filenameOut);
+            string encryptedText = polyalphabeticCipher.encrypt(fileOperations.readFile());
+            fileOperations.writeFile(encryptedText);
+        }
+
+        else if(process == "-d") {
+            string key = argv[2];
+            string filenameIn = argv[4];
+            string filenameOut = argv[5];
+            PolyalphabeticCipher polyalphabeticCipher = PolyalphabeticCipher(key);
+            FileOperations fileOperations = FileOperations(filenameIn, filenameOut);
+            string decryptedText = polyalphabeticCipher.decrypt(fileOperations.readFile());
+            fileOperations.writeFile(decryptedText);
+        }
+
+        else {
+            cout << "Process has been failed";
         }
     }
 
