@@ -85,7 +85,6 @@ string MonoalphabeticCipher::decrypt(string cipherText) {
     char currentCharacter;
     char decryptedCharacter;
     string plainText(cipherText.size(),' ');
-    shuffleAlphabet();
     for(int i = 0; i < cipherText.size(); i = i + 1){
         currentCharacter = cipherText[i];
         decryptedCharacter = characterRecover(currentCharacter);
