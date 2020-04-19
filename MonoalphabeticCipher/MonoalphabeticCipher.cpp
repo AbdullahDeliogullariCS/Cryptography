@@ -14,6 +14,7 @@ using namespace std;
 
 MonoalphabeticCipher::MonoalphabeticCipher(int seed) {
     this->seed = seed;
+    shuffleAlphabet();
 }
 
 void MonoalphabeticCipher::shuffleAlphabet() {
@@ -72,7 +73,6 @@ string MonoalphabeticCipher::encrypt(string plainText) {
     char currentCharacter;
     char encryptedCharacter;
     string cipherText(plainText.size(),' ');
-    shuffleAlphabet();
     for(int i = 0; i < plainText.size(); i = i + 1) {
         currentCharacter = plainText[i];
         encryptedCharacter = characterMap(currentCharacter);

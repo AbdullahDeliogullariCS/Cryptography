@@ -24,7 +24,7 @@ public:
     explicit MonoalphabeticCipher(int seed);
 
 public:
-    void shuffleAlphabet();
+    virtual void shuffleAlphabet();
     string encrypt(string plainText);
     string decrypt(string cipherText);
 };
