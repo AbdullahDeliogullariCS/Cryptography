@@ -13,13 +13,13 @@ set(HEADERS
         CaesarCipher/CaesarCipher.h
         MonoalphabeticCipher/MonoalphabeticCipher.h
         PolyalphabeticCipher/PolyalphabeticCipher.h
-        FileOperations/FileOperations.h)
+        DataEncryptionStandard/DataEncryptionStandard.h)
 
 set(SOURCES
         CaesarCipher/CaesarCipher.cpp
         MonoalphabeticCipher/MonoalphabeticCipher.cpp
         PolyalphabeticCipher/PolyalphabeticCipher.cpp
-        FileOperations/FileOperations.cpp)
+        DataEncryptionStandard/DataEncryptionStandard.cpp)
 
 add_library(core ${HEADERS} ${SOURCES})
 
