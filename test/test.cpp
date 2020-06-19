@@ -9,6 +9,7 @@
 #include "../MonoalphabeticCipher/MonoalphabeticCipher.h"
 #include "../PolyalphabeticCipher/PolyalphabeticCipher.h"
 #include "../DataEncryptionStandard/DataEncryptionStandard.h"
+#include "../DiffieHellmanKeyExchange/DiffieHellmanKeyExchange.h"
 
 using namespace std;
 
@@ -22,6 +23,8 @@ MonoalphabeticCipher monoalphabeticCipher = MonoalphabeticCipher(monoalphabeticR
 PolyalphabeticCipher polyalphabeticCipher = PolyalphabeticCipher(polyalphabeticRandomKey);
 DataEncryptionStandard dataEncryptionStandard = DataEncryptionStandard(desRandomKey);
 DataEncryptionStandard dataEncryptionStandardPermutation = DataEncryptionStandard(desRandomKey);
+DiffieHellmanKeyExchange diffieHellmanKeyExchange = DiffieHellmanKeyExchange();
+
 
 TEST(CaesarCipherTest, EncryptDecryptProcess){
 
@@ -53,6 +56,17 @@ TEST(DataEncryptionStandardTest, EncryptDecryptProcess){
     string plainText = "example1";
     string cipherText = dataEncryptionStandard.encrypt(plainText);
     ASSERT_EQ(plainText, dataEncryptionStandard.decrypt(cipherText));
+
+}
+
+TEST(DiffieHellmanKeyExchangeTest, EncryptDecryptProcess){
+
+    int alice_public_key = diffieHellmanKeyExchange.generatePublicKey(9,4,23);
+    int bob_public_key = diffieHellmanKeyExchange.generatePublicKey(9,3,23);
+
+    int alice_shared_key = diffieHellmanKeyExchange.generateSharedKey(bob_public_key,4,23);
+    int bob_shared_key = diffieHellmanKeyExchange.generateSharedKey(alice_public_key,3,23);
+    ASSERT_EQ(alice_shared_key, bob_shared_key);
 
 }
 
