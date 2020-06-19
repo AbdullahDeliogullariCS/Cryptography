@@ -13,13 +13,15 @@ set(HEADERS
         CaesarCipher/CaesarCipher.h
         MonoalphabeticCipher/MonoalphabeticCipher.h
         PolyalphabeticCipher/PolyalphabeticCipher.h
-        DataEncryptionStandard/DataEncryptionStandard.h)
+        DataEncryptionStandard/DataEncryptionStandard.h
+        DiffieHellmanKeyExchange/DiffieHellmanKeyExchange.h)
 
 set(SOURCES
         CaesarCipher/CaesarCipher.cpp
         MonoalphabeticCipher/MonoalphabeticCipher.cpp
         PolyalphabeticCipher/PolyalphabeticCipher.cpp
-        DataEncryptionStandard/DataEncryptionStandard.cpp)
+        DataEncryptionStandard/DataEncryptionStandard.cpp
+        DiffieHellmanKeyExchange/DiffieHellmanKeyExchange.cpp)
 
 add_library(core ${HEADERS} ${SOURCES})
 
