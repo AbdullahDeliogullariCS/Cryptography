@@ -16,3 +16,6 @@ Polyalphabetic substitution cipher is a series of simple substitution ciphers. I
 ## Data Encryption Standard
 Data Encryption Standard (DES) is a block cipher algorithm that takes plain text in blocks of 64 bits and converts them to ciphertext using keys of 48 bits.
 It is a symmetric key algorithm, which means that the same key is used for encrypting and decrypting ​data.
+
+## Diffie-Hellman Key Exchange
+The Diffie–Hellman key exchange method allows two parties that have no prior knowledge of each other to jointly establish a shared secret key over an insecure channel.
