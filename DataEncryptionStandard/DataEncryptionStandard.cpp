@@ -48,23 +48,17 @@ string DataEncryptionStandard::convertBinaryToString(string binaryText) {
 }
 
 void DataEncryptionStandard::convertKeyStringToBinary() {
-
     this->key64bit.clear();
     this->key64bit = convertStringToBinary(this->key);
-
 }
 
 void DataEncryptionStandard::splitKeyInto2Halves() {
-
     this->key28bitLeftHalve = this->key56bit.substr(0, this->key56bit.length()/2);
     this->key28bitRightHalve = this->key56bit.substr(this->key56bit.length()/2);
-
 }
 
 void DataEncryptionStandard::concatenate2KeyHalves() {
-
     this->key56bit = this->key28bitLeftHalve + this->key28bitRightHalve;
-
 }
 
 void DataEncryptionStandard::permutedChoice1() {
@@ -96,9 +90,7 @@ void DataEncryptionStandard::permutedChoice2() {
 }
 
 void DataEncryptionStandard::convertPlainTextStringToBinary() {
-
     this->plainText64bit = convertStringToBinary(this->plainText);
-
 }
 
 void DataEncryptionStandard::initialPermutation() {
@@ -110,10 +102,8 @@ void DataEncryptionStandard::initialPermutation() {
 }
 
 void DataEncryptionStandard::splitPlainTextInto2Halves() {
-
     this->plainText32bitLeftHalve = this->permutedPlainText64bit.substr(0, this->plainText64bit.length()/2);
     this->plainText32bitRightHalve = this->permutedPlainText64bit.substr(this->plainText64bit.length()/2);
-
 }
 
 void DataEncryptionStandard::expansionPermutation() {
@@ -125,10 +115,8 @@ void DataEncryptionStandard::expansionPermutation() {
 }
 
 void DataEncryptionStandard::plainTextKeyExclusiveDisjunction() {
-
     auto xoredBinary = std::bitset<48>(this->plainText48bit) ^ std::bitset<48>(this->key48bit);
     this->exclusiveDisjunction48bit = xoredBinary.to_string();
-
 }
 
 void DataEncryptionStandard::substitutionProcedure() {
@@ -170,10 +158,8 @@ void DataEncryptionStandard::permutationOperation() {
 }
 
 void DataEncryptionStandard::plainTextChunksExclusiveDisjunction() {
-
     auto xoredBinary = std::bitset<32>(this->plainText32bitLeftHalve) ^ std::bitset<32>(this->permuted32bit);
     this->exclusiveDisjunction32bit = xoredBinary.to_string();
-
 }
 
 void DataEncryptionStandard::plainTextChunksSwap() {
@@ -192,9 +178,7 @@ void DataEncryptionStandard::finalPermutation() {
 }
 
 void DataEncryptionStandard::convertCipherTextBinaryToString() {
-
     this->cipherText = convertBinaryToString(this->cipherText64bit);
-
 }
 
 string DataEncryptionStandard::encrypt(string plainText) {
@@ -212,7 +196,6 @@ string DataEncryptionStandard::encrypt(string plainText) {
         leftShift(shiftAmount);
         concatenate2KeyHalves();
         permutedChoice2();
-        this->key48bitContainer.push_back(this->key48bit);
 
         expansionPermutation();
 
@@ -237,6 +220,15 @@ string DataEncryptionStandard::decrypt(string cipherText) {
     convertPlainTextStringToBinary();
     initialPermutation();
     splitPlainTextInto2Halves();
+
+    this->key48bitContainer.clear();
+    for(int shiftIndex = 0; shiftIndex < this->ShiftTable.size(); shiftIndex = shiftIndex + 1){
+        int shiftAmount = this->ShiftTable[shiftIndex];
+        leftShift(shiftAmount);
+        concatenate2KeyHalves();
+        permutedChoice2();
+        this->key48bitContainer.push_back(this->key48bit);
+    }
 
     for(int shiftIndex = this->ShiftTable.size() - 1; shiftIndex >= 0; shiftIndex = shiftIndex - 1){
         this->key48bit = this->key48bitContainer.at(shiftIndex);
