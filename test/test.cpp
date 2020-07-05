@@ -2,8 +2,7 @@
 // Created by abdullahdeliogullari on 4/18/20.
 //
 
-#include <cstdlib>
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 
 #include "../CaesarCipher/CaesarCipher.h"
 #include "../MonoalphabeticCipher/MonoalphabeticCipher.h"
@@ -16,56 +15,63 @@ using namespace std;
 int caesarRandomKey = rand() % 24;
 int monoalphabeticRandomSeed = rand() % 100;
 string polyalphabeticRandomKey = "secretKey";
-string desRandomKey = "secureKey";
+string desRandomKey = "secretKey";
 
-CaesarCipher caesarCipher = CaesarCipher(caesarRandomKey);
-MonoalphabeticCipher monoalphabeticCipher = MonoalphabeticCipher(monoalphabeticRandomSeed);
-PolyalphabeticCipher polyalphabeticCipher = PolyalphabeticCipher(polyalphabeticRandomKey);
-DataEncryptionStandard dataEncryptionStandard = DataEncryptionStandard(desRandomKey);
-DataEncryptionStandard dataEncryptionStandardPermutation = DataEncryptionStandard(desRandomKey);
-DiffieHellmanKeyExchange diffieHellmanKeyExchange = DiffieHellmanKeyExchange();
+CaesarCipher caesarCipherEncryption = CaesarCipher(caesarRandomKey);
+CaesarCipher caesarCipherDecryption = CaesarCipher(caesarRandomKey);
 
+MonoalphabeticCipher monoalphabeticCipherEncryption = MonoalphabeticCipher(monoalphabeticRandomSeed);
+MonoalphabeticCipher monoalphabeticCipherDecryption = MonoalphabeticCipher(monoalphabeticRandomSeed);
+
+PolyalphabeticCipher polyalphabeticCipherEncryption = PolyalphabeticCipher(polyalphabeticRandomKey);
+PolyalphabeticCipher polyalphabeticCipherDecryption = PolyalphabeticCipher(polyalphabeticRandomKey);
+
+DataEncryptionStandard dataEncryptionStandardEncryption = DataEncryptionStandard(desRandomKey);
+DataEncryptionStandard dataEncryptionStandardDecryption = DataEncryptionStandard(desRandomKey);
+
+DiffieHellmanKeyExchange diffieHellmanKeyExchangeAlice = DiffieHellmanKeyExchange();
+DiffieHellmanKeyExchange diffieHellmanKeyExchangeBob = DiffieHellmanKeyExchange();
 
 TEST(CaesarCipherTest, EncryptDecryptProcess){
 
+    srand((unsigned int)time(NULL));
     string plainText = "exampleText";
-    string cipherText = caesarCipher.encrypt(plainText);
-    ASSERT_EQ(plainText, caesarCipher.decrypt(cipherText));
+    string cipherText = caesarCipherEncryption.encrypt(plainText);
+    ASSERT_EQ(plainText, caesarCipherDecryption.decrypt(cipherText));
 
 }
 
 TEST(MonoalphabeticCipherTest, EncryptDecryptProcess){
 
+    srand((unsigned int)time(NULL));
     string plainText = "exampleText";
-    string cipherText = monoalphabeticCipher.encrypt(plainText);
-    ASSERT_EQ(plainText, monoalphabeticCipher.decrypt(cipherText));
+    string cipherText = monoalphabeticCipherEncryption.encrypt(plainText);
+    ASSERT_EQ(plainText, monoalphabeticCipherDecryption.decrypt(cipherText));
 
 }
 
 TEST(PolyalphabeticCipherTest, EncryptDecryptProcess){
 
     string plainText = "exampleText";
-    string cipherText = polyalphabeticCipher.encrypt(plainText);
-    ASSERT_EQ(plainText, polyalphabeticCipher.decrypt(cipherText));
+    string cipherText = polyalphabeticCipherEncryption.encrypt(plainText);
+    ASSERT_EQ(plainText, polyalphabeticCipherDecryption.decrypt(cipherText));
 
 }
 
 TEST(DataEncryptionStandardTest, EncryptDecryptProcess){
 
-    // 8 bytes long plain-text
     string plainText = "example1";
-    string cipherText = dataEncryptionStandard.encrypt(plainText);
-    ASSERT_EQ(plainText, dataEncryptionStandard.decrypt(cipherText));
+    string cipherText = dataEncryptionStandardEncryption.encrypt(plainText);
+    ASSERT_EQ(plainText, dataEncryptionStandardDecryption.decrypt(cipherText));
 
 }
 
 TEST(DiffieHellmanKeyExchangeTest, EncryptDecryptProcess){
 
-    int alice_public_key = diffieHellmanKeyExchange.generatePublicKey(9,4,23);
-    int bob_public_key = diffieHellmanKeyExchange.generatePublicKey(9,3,23);
-
-    int alice_shared_key = diffieHellmanKeyExchange.generateSharedKey(bob_public_key,4,23);
-    int bob_shared_key = diffieHellmanKeyExchange.generateSharedKey(alice_public_key,3,23);
+    int alice_public_key = diffieHellmanKeyExchangeAlice.generatePublicKey(9,4,167);
+    int bob_public_key = diffieHellmanKeyExchangeBob.generatePublicKey(9,3,167);
+    int alice_shared_key = diffieHellmanKeyExchangeAlice.generateSharedKey(bob_public_key,4,167);
+    int bob_shared_key = diffieHellmanKeyExchangeBob.generateSharedKey(alice_public_key,3,167);
     ASSERT_EQ(alice_shared_key, bob_shared_key);
 
 }
