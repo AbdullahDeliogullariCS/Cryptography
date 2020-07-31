@@ -14,14 +14,14 @@ set(HEADERS
         MonoalphabeticCipher/MonoalphabeticCipher.h
         PolyalphabeticCipher/PolyalphabeticCipher.h
         DataEncryptionStandard/DataEncryptionStandard.h
-        DiffieHellmanKeyExchange/DiffieHellmanKeyExchange.h)
+        DiffieHellmanKeyExchange/DiffieHellmanKeyExchange.h RivestShamirAdleman/RivestShamirAdleman.cpp RivestShamirAdleman/RivestShamirAdleman.h)
 
 set(SOURCES
         CaesarCipher/CaesarCipher.cpp
         MonoalphabeticCipher/MonoalphabeticCipher.cpp
         PolyalphabeticCipher/PolyalphabeticCipher.cpp
         DataEncryptionStandard/DataEncryptionStandard.cpp
-        DiffieHellmanKeyExchange/DiffieHellmanKeyExchange.cpp)
+        DiffieHellmanKeyExchange/DiffieHellmanKeyExchange.cpp RivestShamirAdleman/RivestShamirAdleman.cpp RivestShamirAdleman/RivestShamirAdleman.h)
 
 add_library(core ${HEADERS} ${SOURCES})
 
