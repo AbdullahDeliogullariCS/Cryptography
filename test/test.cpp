@@ -9,6 +9,7 @@
 #include "../PolyalphabeticCipher/PolyalphabeticCipher.h"
 #include "../DataEncryptionStandard/DataEncryptionStandard.h"
 #include "../DiffieHellmanKeyExchange/DiffieHellmanKeyExchange.h"
+#include "../RivestShamirAdleman/RivestShamirAdleman.h";
 
 using namespace std;
 
@@ -31,6 +32,9 @@ DataEncryptionStandard dataEncryptionStandardDecryption = DataEncryptionStandard
 
 DiffieHellmanKeyExchange diffieHellmanKeyExchangeAlice = DiffieHellmanKeyExchange();
 DiffieHellmanKeyExchange diffieHellmanKeyExchangeBob = DiffieHellmanKeyExchange();
+
+RivestShamirAdleman rivestShamirAdlemanEncrption = RivestShamirAdleman(3, 11);
+RivestShamirAdleman rivestShamirAdlemanDecryption = RivestShamirAdleman(3, 11);
 
 TEST(CaesarCipherTest, EncryptDecryptProcess){
 
@@ -73,6 +77,16 @@ TEST(DiffieHellmanKeyExchangeTest, EncryptDecryptProcess){
     int alice_shared_key = diffieHellmanKeyExchangeAlice.generateSharedKey(bob_public_key,4,167);
     int bob_shared_key = diffieHellmanKeyExchangeBob.generateSharedKey(alice_public_key,3,167);
     ASSERT_EQ(alice_shared_key, bob_shared_key);
+
+}
+
+TEST(RivestShamirAdlemanTest, EncryptDecryptProcess){
+
+    int plainText = 2;
+    rivestShamirAdlemanEncrption.calculateModulus();
+    rivestShamirAdlemanDecryption.calculateModulus();
+    int cipherText = rivestShamirAdlemanEncrption.encrypt(7, plainText);
+    ASSERT_EQ(plainText, rivestShamirAdlemanDecryption.decrypt(3 , cipherText));
 
 }
 
