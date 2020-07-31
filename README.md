@@ -19,3 +19,8 @@ It is a symmetric key algorithm, which means that the same key is used for encry
 
 ## Diffie-Hellman Key Exchange
 The Diffie–Hellman key exchange method allows two parties that have no prior knowledge of each other to jointly establish a shared secret key over an insecure channel.
+
+## Rivest-Shamir-Adleman Algorithm
+
+Public key cryptography, also known as asymmetric cryptography, uses two different but mathematically linked keys -- one public and one private. The public key can be shared with everyone, 
+whereas the private key must be kept secret. In RSA cryptography, both the public and the private keys can encrypt a message; the opposite key from the one used to encrypt a message is used to decrypt it.
